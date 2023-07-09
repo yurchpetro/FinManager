@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">FinManager</string>
+    <string name="title_activity_main">FinManager</string>
+    <string name="package_name">com.finmanager</string>
+    <string name="custom_url_scheme">com.finmanager</string>
+</resources>
