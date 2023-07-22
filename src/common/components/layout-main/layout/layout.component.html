@@ -1,0 +1,15 @@
+<ng-container *ngIf="isWeb">
+    <app-web-layout>
+        <ng-container *ngTemplateOutlet="routerRef"></ng-container>
+    </app-web-layout>
+</ng-container>
+
+<ng-container *ngIf="!isWeb">
+    <app-mobile-layout>
+        <ng-container *ngTemplateOutlet="routerRef"></ng-container>
+    </app-mobile-layout>
+</ng-container>
+
+<ng-template #routerRef>
+    <ng-content></ng-content>
+</ng-template>
