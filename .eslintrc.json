@@ -1,6 +1,10 @@
 {
     "root": true,
     "ignorePatterns": ["projects/**/*"],
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+        "requireConfigFile": false
+    },
     "overrides": [
         {
             "files": ["*.ts"],

@@ -20,8 +20,12 @@
         "module": "ES2022",
         "useDefineForClassFields": false,
         "lib": ["ES2022", "dom"],
+        "strictPropertyInitialization": false,
         "paths": {
-            "@common/*": ["src/common/index.ts"],
+            "@common/components": ["src/common/components/index.ts"],
+            "@common/enums": ["src/common/enums/index.ts"],
+            "@core": ["src/core/index.ts"],
+            "@pages/*": ["src/pages/*"]
         }
     },
     "angularCompilerOptions": {
