@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "android": "ng build && npx cap copy && npx cap sync && npx cap open android"
+    "android": "ng build && npx cap copy && npx cap sync && npx cap open android",
+    "sync": "ng build && npx cap copy && npx cap sync"
   },
   "private": true,
   "dependencies": {
