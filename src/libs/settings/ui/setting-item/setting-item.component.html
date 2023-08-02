@@ -1,0 +1,28 @@
+<ion-item class="item">
+    <ng-container [ngSwitch]="actionType">
+        <ng-container *ngSwitchCase="SETTING_ITEM_ENUM.SELECT">
+            <ion-select [label]="title" [placeholder]="selectDefault ?? selectOption[0]">
+                <ion-select-option
+                    *ngFor="let option of selectOption"
+                    [value]="option"
+                >
+                    {{ option }}
+                </ion-select-option>
+            </ion-select>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="SETTING_ITEM_ENUM.POINTER">
+            <ng-container *ngTemplateOutlet="labelRef"></ng-container>
+            <div>left</div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="SETTING_ITEM_ENUM.TOGGLE">
+            <ng-container *ngTemplateOutlet="labelRef"></ng-container>
+            <ion-toggle [checked]="toggleChacked"></ion-toggle>
+        </ng-container>
+    </ng-container>
+</ion-item>
+
+<ng-template #labelRef>
+    <ion-label>{{ title }}</ion-label>
+</ng-template>

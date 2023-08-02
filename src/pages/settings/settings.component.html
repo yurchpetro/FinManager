@@ -1,1 +1,3 @@
-<p>Settings</p>
+<app-setting-item [title]="'POINTER'" [actionType]="SETTING_ITEM_ENUM.POINTER"></app-setting-item>
+<app-setting-item [title]="'SELECT'" [selectDefault]="'orange'" [selectOption]="['Apple', 'Banana', 'orange']" [actionType]="SETTING_ITEM_ENUM.SELECT"></app-setting-item>
+<app-setting-item [title]="'TOGGLE'" [toggleChacked]="true" [actionType]="SETTING_ITEM_ENUM.TOGGLE"></app-setting-item>
