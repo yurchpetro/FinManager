@@ -1,0 +1,27 @@
+.card {
+    display: flex;
+
+    &__icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+    }
+
+    &__header {
+        ion-card-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    &__info {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__content {
+        width: 100%;
+    }
+}
