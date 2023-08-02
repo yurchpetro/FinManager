@@ -2,3 +2,90 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.flex {
+    height: 100% !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.flex-row {
+    flex-direction: row !important;
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+
+.flex-end {
+    justify-content: flex-end !important;
+}
+
+.flex-start {
+    justify-content: flex-start !important;
+}
+
+.space-between {
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.flex-grow {
+    &-1 {
+        flex-grow: 1 !important;
+    }
+
+    &-1 {
+        flex-grow: 0 !important;
+    }
+}
+
+.flex-shrink {
+    &-1 {
+        flex-shrink: 1 !important;
+    }
+
+    &-1 {
+        flex-shrink: 0 !important;
+    }
+}
+
+.--w {
+    &-30 {
+        width: 30%;
+        max-width: 30%;
+    }
+
+    &-40 {
+        width: 40%;
+        max-width: 40%;
+    }
+
+    &-45 {
+        width: 45%;
+        max-width: 45%;
+    }
+
+    &-50 {
+        width: 50%;
+        max-width: 50%;
+    }
+
+    &-60 {
+        width: 60%;
+        max-width: 60%;
+    }
+
+    &-70 {
+        width: 70%;
+        max-width: 70%;
+    }
+
+    &-100 {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+    }
+}
