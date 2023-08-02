@@ -1,8 +1,12 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-title>Finance Manager</ion-title>
-        <ion-icon name="settings-outline"></ion-icon>
-    </ion-toolbar>
+    <div class="header__menu">
+        <div class="header__title">Finance Manager</div>
+        <div class="header__action">
+            <div [routerLink]="ROUTES_ENUM.SETTINGS">
+                <ion-icon class="menu__item--icon" name="settings-outline"></ion-icon>
+            </div>
+        </div>
+    </div>
 </ion-header>
 
 <ion-content class="content">
@@ -10,7 +14,15 @@
 </ion-content>
 
 <ion-footer>
-    <ion-toolbar>
-        <ion-title>Footer Toolbar</ion-title>
-    </ion-toolbar>
+    <div class="menu">
+        <div routerLinkActive="active" [routerLink]="ROUTES_ENUM.DASHBOARD" class="menu__item">
+            <ion-icon class="menu__item--icon icon__turn" name="swap-vertical-outline"></ion-icon>
+        </div>
+        <div routerLinkActive="active" [routerLink]="ROUTES_ENUM.CALENDAR" class="menu__item">
+            <ion-icon class="menu__item--icon" name="calendar-outline"></ion-icon>
+        </div>
+        <div routerLinkActive="active" [routerLink]="ROUTES_ENUM.STATISTIC" class="menu__item">
+            <ion-icon class="menu__item--icon" name="stats-chart-outline"></ion-icon>
+        </div>
+    </div>
 </ion-footer>

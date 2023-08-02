@@ -1,6 +1,29 @@
-<mat-toolbar>
-    <span>Finance Manager</span>
-    <ion-icon name="settings-outline"></ion-icon>
-</mat-toolbar>
+<ion-header class="header">
+    <div class="header__menu flex">
+        <div class="header__title">Finance Manager</div>
+        <div class="menu">
+            <div routerLinkActive="active" [routerLink]="ROUTES_ENUM.DASHBOARD" class="menu__item">
+                <ion-icon class="menu__item--icon icon__turn" name="swap-vertical-outline"></ion-icon>
+                Dashboard
+            </div>
+            <div routerLinkActive="active" [routerLink]="ROUTES_ENUM.CALENDAR" class="menu__item">
+                <ion-icon class="menu__item--icon" name="calendar-outline"></ion-icon>
+                Calendar
+            </div>
+            <div routerLinkActive="active" [routerLink]="ROUTES_ENUM.STATISTIC" class="menu__item">
+                <ion-icon class="menu__item--icon" name="stats-chart-outline"></ion-icon>
+                Statistics
+            </div>
+            <div routerLinkActive="active" [routerLink]="ROUTES_ENUM.SETTINGS" class="menu__item">
+                <ion-icon class="menu__item--icon" name="settings-outline"></ion-icon>
+                Settings
+            </div>
+        </div>
+    </div>
+    <div class="header__action">
+        <ion-icon class="header__action--icon" name="log-out-outline"></ion-icon>
+        Login
+    </div>
+</ion-header>
 
 <ng-content></ng-content>
