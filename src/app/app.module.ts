@@ -10,13 +10,7 @@ import { RouterOutlet } from '@angular/router';
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        IonicModule.forRoot(),
-        LayoutModule,
-        RouterOutlet,
-    ],
+    imports: [BrowserModule, AppRoutingModule, IonicModule.forRoot(), LayoutModule, RouterOutlet],
     providers: [],
     bootstrap: [AppComponent],
 })
