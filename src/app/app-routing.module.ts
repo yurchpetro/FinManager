@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PublicAccessGuard, UserAccessGuard } from '@core';
 
 const routes: Routes = [
     {
@@ -9,6 +10,7 @@ const routes: Routes = [
     },
     {
         path: 'home',
+        canActivate: [PublicAccessGuard],
         loadChildren: () =>
             import('@pages/home/home.module').then(
                 (module: typeof import('@pages/home/home.module')) => module.HomeModule
@@ -16,6 +18,7 @@ const routes: Routes = [
     },
     {
         path: 'dashboard',
+        canActivate: [UserAccessGuard],
         loadChildren: () =>
             import('@pages/dashboard/dashboard.module').then(
                 (module: typeof import('@pages/dashboard/dashboard.module')) => module.DashboardModule
@@ -23,6 +26,7 @@ const routes: Routes = [
     },
     {
         path: 'calendar',
+        canActivate: [UserAccessGuard],
         loadChildren: () =>
             import('@pages/calendar/calendar.module').then(
                 (module: typeof import('@pages/calendar/calendar.module')) => module.CalendarModule
@@ -30,6 +34,7 @@ const routes: Routes = [
     },
     {
         path: 'settings',
+        canActivate: [UserAccessGuard],
         loadChildren: () =>
             import('@pages/settings/settings.module').then(
                 (module: typeof import('@pages/settings/settings.module')) => module.SettingsModule
@@ -37,6 +42,7 @@ const routes: Routes = [
     },
     {
         path: 'statistic',
+        canActivate: [UserAccessGuard],
         loadChildren: () =>
             import('@pages/statistic/statistic.module').then(
                 (module: typeof import('@pages/statistic/statistic.module')) => module.StatisticModule

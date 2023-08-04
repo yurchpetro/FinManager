@@ -42,13 +42,9 @@ export class SignInComponent implements OnInit {
                         return of(null);
                     })
                 )
-                .subscribe(() => {
+                .subscribe((): void => {
                     void this.router.navigate([ROUTES_ENUM.DASHBOARD]);
                 });
         }
-    }
-
-    public onLogout(): void {
-        this.authService.signOut();
     }
 }
