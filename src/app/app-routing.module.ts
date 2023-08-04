@@ -8,35 +8,38 @@ const routes: Routes = [
         pathMatch: 'full',
     },
     {
+        path: 'home',
+        loadChildren: () =>
+            import('@pages/home/home.module').then(
+                (module: typeof import('@pages/home/home.module')) => module.HomeModule
+            ),
+    },
+    {
         path: 'dashboard',
         loadChildren: () =>
             import('@pages/dashboard/dashboard.module').then(
-                (module: typeof import('@pages/dashboard/dashboard.module')) =>
-                    module.DashboardModule
+                (module: typeof import('@pages/dashboard/dashboard.module')) => module.DashboardModule
             ),
     },
     {
         path: 'calendar',
         loadChildren: () =>
             import('@pages/calendar/calendar.module').then(
-                (module: typeof import('@pages/calendar/calendar.module')) =>
-                    module.CalendarModule
+                (module: typeof import('@pages/calendar/calendar.module')) => module.CalendarModule
             ),
     },
     {
         path: 'settings',
         loadChildren: () =>
             import('@pages/settings/settings.module').then(
-                (module: typeof import('@pages/settings/settings.module')) =>
-                    module.SettingsModule
+                (module: typeof import('@pages/settings/settings.module')) => module.SettingsModule
             ),
     },
     {
         path: 'statistic',
         loadChildren: () =>
             import('@pages/statistic/statistic.module').then(
-                (module: typeof import('@pages/statistic/statistic.module')) =>
-                    module.StatisticModule
+                (module: typeof import('@pages/statistic/statistic.module')) => module.StatisticModule
             ),
     },
 ];
