@@ -11,25 +11,32 @@ export class AuthService {
 
     constructor(public auth: AngularFireAuth) {
         this.isLoggedIn$ = this.userSource.pipe(distinctUntilChanged());
-        this.isLoggedIn$.subscribe(console.warn);
     }
 
-    // Sign in with email/password
     public signInWithEmail(email: string, password: string): Observable<firebase.auth.UserCredential> {
-        this.auth
-            .signInWithEmailAndPassword(email, password)
+        const signIn: Promise<firebase.auth.UserCredential> = this.auth.signInWithEmailAndPassword(email, password);
+        this.setLoginState(signIn);
+        return from(signIn);
+    }
+
+    public signUpWithEmail(email: string, password: string): Observable<firebase.auth.UserCredential> {
+        const signUp: Promise<firebase.auth.UserCredential> = this.auth.createUserWithEmailAndPassword(email, password);
+        this.setLoginState(signUp);
+        return from(signUp);
+    }
+
+    public signOut(): Observable<void> {
+        this.userSource.next(false);
+        return from(this.auth.signOut());
+    }
+
+    private setLoginState(promise: Promise<firebase.auth.UserCredential>): void {
+        promise
             .then((): void => {
                 this.userSource.next(true);
             })
             .catch((): void => {
                 this.userSource.next(false);
             });
-        return from(this.auth.signInWithEmailAndPassword(email, password));
-    }
-
-    // Sign out
-    public signOut(): Observable<void> {
-        this.userSource.next(false);
-        return from(this.auth.signOut());
     }
 }
