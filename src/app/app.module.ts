@@ -16,6 +16,8 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideFunctions, getFunctions } from '@angular/fire/functions';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AuthService } from '@core';
 
 @NgModule({
     declarations: [AppComponent],
@@ -26,13 +28,14 @@ import { AngularFireModule } from '@angular/fire/compat';
         LayoutModule,
         RouterOutlet,
         AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
         provideFirebaseApp(() => initializeApp(environment.firebase)),
         provideAnalytics(() => getAnalytics()),
         provideAuth(() => getAuth()),
         provideFirestore(() => getFirestore()),
         provideFunctions(() => getFunctions()),
     ],
-    providers: [ScreenTrackingService, UserTrackingService],
+    providers: [ScreenTrackingService, UserTrackingService, AuthService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
