@@ -1,15 +1,24 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { BehaviorSubject, distinctUntilChanged, from, Observable } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, from, Observable, of } from 'rxjs';
 import firebase from 'firebase/compat';
+import { LocalStorageService } from './local-storage.service';
+import { ROUTES_ENUM, RoutesType } from '../enums/routes.enum';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
     public readonly isLoggedIn$: Observable<boolean>;
+    private readonly defaultRedirect: RoutesType = ROUTES_ENUM.DASHBOARD;
 
     private readonly userSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-    constructor(public auth: AngularFireAuth) {
+    constructor(
+        private readonly auth: AngularFireAuth,
+        private readonly localStorageService: LocalStorageService,
+        private readonly router: Router
+    ) {
+        this.autoLogin();
         this.isLoggedIn$ = this.userSource.pipe(distinctUntilChanged());
     }
 
@@ -27,16 +36,45 @@ export class AuthService {
 
     public signOut(): Observable<void> {
         this.userSource.next(false);
+        this.localStorageService.removeItem('accessToken');
         return from(this.auth.signOut());
     }
 
     private setLoginState(promise: Promise<firebase.auth.UserCredential>): void {
         promise
-            .then((): void => {
-                this.userSource.next(true);
+            .then(async (userCredential: firebase.auth.UserCredential): Promise<void> => {
+                if (userCredential.user) {
+                    this.localStorageService.setItem('accessToken', await userCredential.user.getIdToken());
+                    this.userSource.next(true);
+                }
             })
             .catch((): void => {
                 this.userSource.next(false);
+                this.localStorageService.setItem('accessToken', 'null');
             });
+    }
+
+    private autoLogin(): Observable<firebase.auth.UserCredential | null> {
+        const authToken: string | null = this.getStoredAuthToken();
+
+        if (authToken) {
+            const autoLogin: Promise<firebase.auth.UserCredential> = this.auth.signInWithCustomToken(authToken);
+            autoLogin.then((): void => {
+                this.userSource.next(true);
+                this.redirectTo();
+            });
+
+            return from(autoLogin);
+        } else {
+            return of(null);
+        }
+    }
+
+    private getStoredAuthToken(): string | null {
+        return localStorage.getItem('accessToken');
+    }
+
+    private redirectTo(): void {
+        void this.router.navigate([this.defaultRedirect]);
     }
 }

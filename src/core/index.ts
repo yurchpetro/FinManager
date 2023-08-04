@@ -5,6 +5,7 @@ export * from './services/platform.service';
 export * from './services/auth.service';
 export * from './services/public-access.guard';
 export * from './services/user-access.guard';
+export * from './services/local-storage.service';
 
 // enums
 export * from './enums/platform.enum';
