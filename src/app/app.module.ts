@@ -17,7 +17,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideFunctions, getFunctions } from '@angular/fire/functions';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AuthService, CoreModule, LocalStorageService } from '@core';
+import { AuthService, CoreModule } from '@core';
 
 @NgModule({
     declarations: [AppComponent],
@@ -36,7 +36,7 @@ import { AuthService, CoreModule, LocalStorageService } from '@core';
         provideFunctions(() => getFunctions()),
         CoreModule,
     ],
-    providers: [ScreenTrackingService, UserTrackingService, AuthService, LocalStorageService],
+    providers: [ScreenTrackingService, UserTrackingService, AuthService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

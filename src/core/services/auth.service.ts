@@ -5,6 +5,7 @@ import firebase from 'firebase/compat';
 import { LocalStorageService } from './local-storage.service';
 import { ROUTES_ENUM, RoutesType } from '../enums/routes.enum';
 import { Router } from '@angular/router';
+import { InitUserService } from './init-user.service';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +17,8 @@ export class AuthService {
     constructor(
         private readonly auth: AngularFireAuth,
         private readonly localStorageService: LocalStorageService,
-        private readonly router: Router
+        private readonly router: Router,
+        private readonly initUserService: InitUserService
     ) {
         this.autoLogin();
         this.isLoggedIn$ = this.userSource.pipe(distinctUntilChanged());
@@ -31,6 +33,11 @@ export class AuthService {
     public signUpWithEmail(email: string, password: string): Observable<firebase.auth.UserCredential> {
         const signUp: Promise<firebase.auth.UserCredential> = this.auth.createUserWithEmailAndPassword(email, password);
         this.setLoginState(signUp);
+        signUp.then((userCredential: firebase.auth.UserCredential): void => {
+            if (userCredential.user) {
+                this.initUserService.init(userCredential.user);
+            }
+        });
         return from(signUp);
     }
 

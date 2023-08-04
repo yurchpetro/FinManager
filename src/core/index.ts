@@ -13,3 +13,4 @@ export * from './enums/routes.enum';
 
 // models
 export * from './models/environment.model';
+export * from './models/user-record.model';
