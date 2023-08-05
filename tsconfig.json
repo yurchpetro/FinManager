@@ -26,7 +26,9 @@
             "@common/components": ["src/common/components/index.ts"],
             "@common/enums": ["src/common/enums/index.ts"],
             "@common/models": ["src/common/models/index.ts"],
+            "@common/utils": ["src/common/index.ts"],
             "@common/constants": ["src/common/constants/index.ts"],
+            "@common/data-access": ["src/common/data-access/index.ts"],
             "@core": ["src/core/index.ts"],
             "@pages/*": ["src/pages/*"],
             "@libs/*": ["src/libs/*"]
