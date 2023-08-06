@@ -1,6 +1,7 @@
 import { TransactionType } from '../enums/transaction-type.enum';
 
 export interface TransactionModel {
+    id: string;
     name: string;
     description: string;
     category: string;
