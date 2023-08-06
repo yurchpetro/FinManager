@@ -1,9 +1,7 @@
-import { UserModel } from '@common/models';
-
 export interface DashboardListState {
-    current: UserModel | null;
+    mounth: string;
 }
 
-export const initialAppState: DashboardListState = {
-    current: null,
+export const initialDashboardListState: DashboardListState = {
+    mounth: (new Date().getMonth() + 1).toString() + '-' + new Date().getFullYear().toString(),
 };

@@ -8,7 +8,7 @@ import { DashboardDataState } from './dashboard-data.state';
 import { fromListDataAdapter } from './dashboard-data.adapter';
 import { TransactionModel } from '@common/models';
 
-export namespace fromListDataQuery {
+export namespace fromDashboardDataQuery {
     export const getState: MemoizedSelector<FeaturePartialState, DashboardDataState> = createSelector(
         fromFeatureQuerySelector.getFeature,
         (state: FeatureState) => state[FEATURE_STATE_KEY.DASHBOARD_DATA]

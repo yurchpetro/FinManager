@@ -5,10 +5,11 @@ import { Observable } from 'rxjs';
 
 import { FeaturePartialState } from './feature.state';
 
-import { UserModel } from '@common/models';
+import { CreateTransactionModel, TransactionModel } from '@common/models';
 import { ModelStatus } from '@common/enums';
 import { fromDashboardAsyncQuery } from './dashboard-async/dashboard-async.selectors';
 import { fromDashboardAsyncActions } from './dashboard-async/dashboard-async.actions';
+import { fromDashboardDataQuery } from '@libs/dashboard/data-access/store/dashboard-data/dashboard-data.selectors';
 
 @Injectable()
 export class DashboardFeatureFacade {
@@ -25,13 +26,29 @@ export class DashboardFeatureFacade {
         select(fromDashboardAsyncQuery.getErrorMassage)
     );
 
+    public readonly transaction$: Observable<TransactionModel[]> = this.store.pipe(
+        select(fromDashboardDataQuery.getAll)
+    );
+
     constructor(private readonly store: Store<FeaturePartialState>) {}
 
     // ================================
     // Async Actions
     // ================================
 
-    public Load(): void {
+    public load(): void {
         this.store.dispatch(fromDashboardAsyncActions.Load());
+    }
+
+    public create(transaction: CreateTransactionModel): void {
+        this.store.dispatch(fromDashboardAsyncActions.Create({ transaction }));
+    }
+
+    public update(transaction: Partial<TransactionModel>): void {
+        this.store.dispatch(fromDashboardAsyncActions.Update({ transaction }));
+    }
+
+    public delete(id: string): void {
+        this.store.dispatch(fromDashboardAsyncActions.Delete({ id }));
     }
 }

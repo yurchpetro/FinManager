@@ -8,6 +8,7 @@ import { DashboardFeatureFacade } from './store/dashboard-feature.facade';
 import { DashboardAsyncEffects } from './store/dashboard-async/dashboard-async.effects';
 import { DashboardListEffects } from './store/dashboard-list/dashboard-list.effects';
 import { DashboardDataEffects } from './store/dashboard-data/dashboard-data.effects';
+import { DashboardFireService } from './services/dashboard-fire.service';
 
 @NgModule({
     imports: [
@@ -15,6 +16,6 @@ import { DashboardDataEffects } from './store/dashboard-data/dashboard-data.effe
         StoreModule.forFeature(FEATURE_KEY.FEATURE, featureReducers),
         EffectsModule.forFeature([DashboardListEffects, DashboardAsyncEffects, DashboardDataEffects]),
     ],
-    providers: [DashboardFeatureFacade],
+    providers: [DashboardFeatureFacade, DashboardFireService],
 })
 export class DashboardDataAccessModule {}

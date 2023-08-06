@@ -16,6 +16,7 @@ export class AppFeatureFacade {
     // ================================
 
     public readonly currentUser$: Observable<UserModel | null> = this.store.pipe(select(fromAppQuery.getUser));
+    public readonly currentUserId$: Observable<string | null> = this.store.pipe(select(fromAppQuery.getUserId));
 
     constructor(private readonly store: Store<FeaturePartialState>) {}
 

@@ -1,6 +1,6 @@
 import { ActionCreatorBy } from '@core';
 import { createAction, props } from '@ngrx/store';
-import { TransactionModel, UserModel } from '@common/models';
+import { CreateTransactionModel, TransactionModel, UserModel } from '@common/models';
 
 export namespace fromDashboardAsyncActions {
     export const Load: ActionCreatorBy.Type = createAction('[Dashboard] Load');
@@ -17,29 +17,13 @@ export namespace fromDashboardAsyncActions {
     );
     export type LoadError = ReturnType<typeof LoadError>;
 
-    // // ================================
-    // // Fetch
-    // // ================================
-    //
-    // export const Fetch: ActionCreatorBy.Type = createAction('Fetch');
-    // export type Fetch = ReturnType<typeof Fetch>;
-    //
-    // export const FetchSuccess: ActionCreatorBy.Props<{ models: LabelStateModel[] }> = createAction(
-    //     actionTypeCreator('Fetch Success'),
-    //     props()
-    // );
-    // export type FetchSuccess = ReturnType<typeof FetchSuccess>;
-    //
-    // export const FetchError: ActionCreatorBy.Type = createAction(actionTypeCreator('Fetch Error'));
-    // export type FetchError = ReturnType<typeof FetchError>;
-
     // ================================
     // Create
     // ================================
 
-    export const Create: ActionCreatorBy.Props<{ transaction: TransactionModel }> = createAction(
+    export const Create: ActionCreatorBy.Props<{ transaction: CreateTransactionModel }> = createAction(
         '[Dashboard Async] Create',
-        props<{ transaction: TransactionModel }>()
+        props<{ transaction: CreateTransactionModel }>()
     );
     export type Create = ReturnType<typeof Create>;
 

@@ -15,4 +15,9 @@ export namespace fromAppQuery {
         getState,
         (state: AppState) => state.current
     );
+
+    export const getUserId: MemoizedSelector<FeaturePartialState, string | null> = createSelector(
+        getState,
+        (state: AppState) => state.current?.uid ?? null
+    );
 }

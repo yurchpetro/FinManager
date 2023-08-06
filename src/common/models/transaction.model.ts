@@ -1,12 +1,5 @@
-import { TransactionType } from '../enums/transaction-type.enum';
+import { CreateTransactionModel } from './create-transaction.model';
 
-export interface TransactionModel {
+export interface TransactionModel extends CreateTransactionModel {
     id: string;
-    name: string;
-    description: string;
-    category: string;
-    amount: number;
-    date: Date;
-    wallet: string;
-    type: TransactionType;
 }

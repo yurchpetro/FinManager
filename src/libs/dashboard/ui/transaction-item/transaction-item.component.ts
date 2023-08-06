@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { TransactionModel } from '@common/models';
 
 @Component({
@@ -10,4 +10,15 @@ import { TransactionModel } from '@common/models';
 export class TransactionItemComponent {
     @Input() public isWeb: boolean;
     @Input() public transaction: TransactionModel;
+
+    @Output() public edit: EventEmitter<TransactionModel> = new EventEmitter<TransactionModel>();
+    @Output() public delete: EventEmitter<string> = new EventEmitter<string>();
+
+    public onEdit(): void {
+        this.edit.emit(this.transaction);
+    }
+
+    public onDelete(): void {
+        this.delete.emit(this.transaction.id);
+    }
 }

@@ -20,14 +20,5 @@ export class DashboardDataEffects {
         )
     );
 
-    // public readonly onAsyncFetchSuccess$: Observable<Action> = createEffect(() =>
-    //     this.actions$.pipe(
-    //         ofType(fromDashboardAsyncActions.FetchSuccess),
-    //         map(({ models }: fromDashboardAsyncActions.FetchSuccess) => {
-    //             return fromListDataActions.SetAllAction({ models });
-    //         })
-    //     )
-    // );
-
     constructor(private readonly actions$: Actions) {}
 }
