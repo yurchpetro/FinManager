@@ -1,5 +1,7 @@
 export * from './core.module';
 
+export * from './app.actions';
+
 // services
 export * from './services/platform.service';
 export * from './services/auth.service';
@@ -14,3 +16,4 @@ export * from './enums/routes.enum';
 // models
 export * from './models/environment.model';
 export * from './models/user-record.model';
+export * from './models/action-creator.type';

@@ -6,6 +6,8 @@ import { LocalStorageService } from './local-storage.service';
 import { ROUTES_ENUM, RoutesType } from '../enums/routes.enum';
 import { Router } from '@angular/router';
 import { InitUserService } from './init-user.service';
+import { AppFeatureFacade } from '@common/data-access';
+import { UserModel } from '@common/models';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +20,8 @@ export class AuthService {
         private readonly auth: AngularFireAuth,
         private readonly localStorageService: LocalStorageService,
         private readonly router: Router,
-        private readonly initUserService: InitUserService
+        private readonly initUserService: InitUserService,
+        private readonly appFeatureFacade: AppFeatureFacade
     ) {
         this.autoLogin();
         this.isLoggedIn$ = this.userSource.pipe(distinctUntilChanged());
@@ -53,6 +56,15 @@ export class AuthService {
                 if (userCredential.user) {
                     this.localStorageService.setItem('accessToken', await userCredential.user.getIdToken());
                     this.userSource.next(true);
+                    const currentUser: UserModel = {
+                        displayName: userCredential.user.displayName,
+                        email: userCredential.user.email,
+                        emailVerified: userCredential.user.emailVerified,
+                        photoURL: userCredential.user.photoURL,
+                        uid: userCredential.user.uid,
+                    };
+
+                    this.appFeatureFacade.setUser(currentUser);
                 }
             })
             .catch((): void => {

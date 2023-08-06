@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +19,11 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AuthService, CoreModule } from '@core';
 
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { clearStateReducer } from './clear-state.reducer';
+import { CommonDataAccessModule } from '@common/data-access';
+
 @NgModule({
     declarations: [AppComponent],
     imports: [
@@ -27,6 +32,7 @@ import { AuthService, CoreModule } from '@core';
         IonicModule.forRoot(),
         LayoutModule,
         RouterOutlet,
+
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule,
         provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -35,6 +41,23 @@ import { AuthService, CoreModule } from '@core';
         provideFirestore(() => getFirestore()),
         provideFunctions(() => getFunctions()),
         CoreModule,
+
+        StoreModule.forRoot(
+            {},
+            {
+                runtimeChecks: {
+                    strictStateImmutability: true,
+                    strictActionImmutability: true,
+                    strictStateSerializability: true,
+                    strictActionSerializability: true,
+                    strictActionWithinNgZone: true,
+                    strictActionTypeUniqueness: true,
+                },
+                metaReducers: [clearStateReducer],
+            }
+        ),
+        StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+        CommonDataAccessModule,
     ],
     providers: [ScreenTrackingService, UserTrackingService, AuthService],
     bootstrap: [AppComponent],
