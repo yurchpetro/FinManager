@@ -1,0 +1,15 @@
+<ion-item (click)="onShowDatePicker()">
+    <ion-label>{{ label }}</ion-label>
+    <ion-text slot="end">{{ selectedDate | date: dateFormat }}</ion-text>
+</ion-item>
+
+<div class="datepicker">
+    <ion-datetime
+        *ngIf="isDatePickerShown"
+        show-default-buttons="true"
+        [mode]="'date'"
+        [hourCycle]="hourCycle"
+        (ionCancel)="onClose()"
+        (ionChange)="setDate($event)"
+    ></ion-datetime>
+</div>
