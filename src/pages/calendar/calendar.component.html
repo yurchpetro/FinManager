@@ -1,19 +1,5 @@
 <app-horizontal-select [title]="(mounth$ | async)!" [dateFormat]="'MMMM yyyy'" (left)="previousMonth()" (right)="nextMounth()"></app-horizontal-select>
 
-<div class="flex">
-    <div>
-        <p>Income</p>
-        <p>45</p>
-    </div>
-    <div>
-        <p>Expense</p>
-        <p>45</p>
-    </div>
-    <div>
-        <p>Total</p>
-        <p>45</p>
-    </div>
-</div>
-
+<app-mounth-summary [summary]="(mounthSummary$ | async)!"></app-mounth-summary>
 
 <app-calendar-table [calendarItems]="(calendarItems$ | async)!"></app-calendar-table>
