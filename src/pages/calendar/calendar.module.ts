@@ -6,10 +6,18 @@ import { CalendarRoutingModule } from '@pages/calendar/calendar-routing.module';
 import { IonicModule } from '@ionic/angular';
 import { HorizontalSelectComponent } from '@common/components';
 import { CalendarUiModule } from '@libs/calendar/ui/calendar-ui.module';
+import { CalendarDataAccessModule } from '@libs/calendar/data-access/calendar-data-access.module';
 
 @NgModule({
     declarations: [CalendarComponent],
-    imports: [CommonModule, CalendarRoutingModule, IonicModule, HorizontalSelectComponent, CalendarUiModule],
+    imports: [
+        CommonModule,
+        CalendarRoutingModule,
+        IonicModule,
+        HorizontalSelectComponent,
+        CalendarUiModule,
+        CalendarDataAccessModule,
+    ],
     providers: [],
 })
 export class CalendarModule {}

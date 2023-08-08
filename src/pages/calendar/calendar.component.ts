@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CalendarFeatureFacade } from '@libs/calendar/data-access/store/calendar-feature.facade';
 
 @Component({
     selector: 'app-calendar',
@@ -6,4 +7,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     styleUrls: ['./calendar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CalendarComponent {}
+export class CalendarComponent {
+    constructor(private readonly calendarFeatureFacade: CalendarFeatureFacade) {
+        calendarFeatureFacade.load();
+        calendarFeatureFacade.transaction$.subscribe(console.warn);
+    }
+}
