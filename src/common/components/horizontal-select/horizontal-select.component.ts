@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'app-horizontal-select',
@@ -7,10 +8,11 @@ import { IonicModule } from '@ionic/angular';
     styleUrls: ['./horizontal-select.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [IonicModule],
+    imports: [IonicModule, DatePipe],
 })
 export class HorizontalSelectComponent {
-    @Input() public title: string;
+    @Input() public title: string | number;
+    @Input() public dateFormat: string;
     @Output() public readonly left: EventEmitter<void> = new EventEmitter<void>();
     @Output() public readonly right: EventEmitter<void> = new EventEmitter<void>();
 

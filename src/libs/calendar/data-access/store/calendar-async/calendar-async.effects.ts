@@ -9,6 +9,9 @@ import { TransactionModel } from '@common/models';
 import { fromCalendarListQuery } from '../calendar-list/calendar-list.selectors';
 import { LoadTransactionService } from '@common/services';
 import { CreateCalendarItemService } from '@libs/calendar/utils/services/create-calendar-item.service';
+import { fromCalendarListActions } from '@libs/calendar/data-access/store/calendar-list/calendar-list.actions';
+import { map } from 'rxjs/operators';
+import { nextMounth } from '@common/utils';
 
 @Injectable()
 export class CalendarAsyncEffects {
@@ -34,6 +37,24 @@ export class CalendarAsyncEffects {
                     }),
                     catchError(err => of(fromCalendarAsyncActions.LoadError({ massage: err.toString() })))
                 );
+            })
+        )
+    );
+
+    public readonly onNextMonth$: Observable<Action> = createEffect(() =>
+        this.actions$.pipe(
+            ofType(fromCalendarListActions.SetNextMonth),
+            map(() => {
+                return fromCalendarAsyncActions.Load();
+            })
+        )
+    );
+
+    public readonly onPreviousMonth$: Observable<Action> = createEffect(() =>
+        this.actions$.pipe(
+            ofType(fromCalendarListActions.SetPreviousMonth),
+            map(() => {
+                return fromCalendarAsyncActions.Load();
             })
         )
     );

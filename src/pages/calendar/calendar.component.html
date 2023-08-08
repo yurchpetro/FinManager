@@ -1,4 +1,4 @@
-<app-horizontal-select [title]="'Month 123'"></app-horizontal-select>
+<app-horizontal-select [title]="(mounth$ | async)!" [dateFormat]="'MMMM yyyy'" (left)="previousMonth()" (right)="nextMounth()"></app-horizontal-select>
 
 <div class="flex">
     <div>

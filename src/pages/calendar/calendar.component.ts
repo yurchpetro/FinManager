@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CalendarFeatureFacade } from '@libs/calendar/data-access/store/calendar-feature.facade';
 import { Observable } from 'rxjs';
 import { CalendarItemModel } from '@libs/calendar/utils/models/calendar-item.model';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-calendar',
@@ -11,11 +12,27 @@ import { CalendarItemModel } from '@libs/calendar/utils/models/calendar-item.mod
 })
 export class CalendarComponent implements OnInit {
     public calendarItems$: Observable<CalendarItemModel[]>;
+    public mounth$: Observable<number>;
 
     constructor(private readonly calendarFeatureFacade: CalendarFeatureFacade) {}
 
     public ngOnInit(): void {
         this.calendarFeatureFacade.load();
         this.calendarItems$ = this.calendarFeatureFacade.calendarItems$;
+        this.mounth$ = this.calendarFeatureFacade.mounth$.pipe(
+            map((value: string) => {
+                const date: string[] = value.split('-');
+
+                return new Date().setFullYear(+date[1], +date[0] - 1);
+            })
+        );
+    }
+
+    public previousMonth(): void {
+        this.calendarFeatureFacade.previousMonth();
+    }
+
+    public nextMounth(): void {
+        this.calendarFeatureFacade.nextMonth();
     }
 }
