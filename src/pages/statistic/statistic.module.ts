@@ -5,10 +5,17 @@ import { StatisticComponent } from '@pages/statistic/statistic.component';
 import { StatisticRoutingModule } from '@pages/statistic/statistic-routing.module';
 import { HorizontalSelectComponent } from '@common/components';
 import { StatisticUiModule } from '@libs/statistic/ui/statistic-ui.module';
+import { StatisticDataAccessModule } from '@libs/statistic/data-access/statistic-data-access.module';
 
 @NgModule({
     declarations: [StatisticComponent],
-    imports: [CommonModule, StatisticRoutingModule, HorizontalSelectComponent, StatisticUiModule],
+    imports: [
+        CommonModule,
+        StatisticRoutingModule,
+        HorizontalSelectComponent,
+        StatisticUiModule,
+        StatisticDataAccessModule,
+    ],
     providers: [],
 })
 export class StatisticModule {}
