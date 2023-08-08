@@ -1,9 +1,9 @@
 import { EntityAdapter, IdSelectorStr } from '@ngrx/entity/src/models';
 import { createEntityAdapter } from '@ngrx/entity';
-import { TransactionModel } from '@common/models';
+import { CalendarItemModel } from '@libs/calendar/utils/models/calendar-item.model';
 
-const selectEntityId: IdSelectorStr<TransactionModel> = (model: TransactionModel) => model.id;
+const selectEntityId: IdSelectorStr<CalendarItemModel> = (model: CalendarItemModel) => model.id;
 
-export const fromCalendarDataAdapter: EntityAdapter<TransactionModel> = createEntityAdapter<TransactionModel>({
+export const fromCalendarDataAdapter: EntityAdapter<CalendarItemModel> = createEntityAdapter<CalendarItemModel>({
     selectId: selectEntityId,
 });

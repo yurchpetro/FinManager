@@ -9,6 +9,7 @@ import { featureReducers } from './store/feature.reducers';
 import { CalendarListEffects } from './store/calendar-list/calendar-list.effects';
 import { CalendarAsyncEffects } from './store/calendar-async/calendar-async.effects';
 import { CalendarDataEffects } from './store/calendar-data/calendar-data.effects';
+import { CreateCalendarItemService } from '@libs/calendar/utils/services/create-calendar-item.service';
 
 @NgModule({
     imports: [
@@ -16,6 +17,6 @@ import { CalendarDataEffects } from './store/calendar-data/calendar-data.effects
         StoreModule.forFeature(FEATURE_KEY.FEATURE, featureReducers),
         EffectsModule.forFeature([CalendarListEffects, CalendarAsyncEffects, CalendarDataEffects]),
     ],
-    providers: [CalendarFeatureFacade, LoadTransactionService],
+    providers: [CalendarFeatureFacade, LoadTransactionService, CreateCalendarItemService],
 })
 export class CalendarDataAccessModule {}

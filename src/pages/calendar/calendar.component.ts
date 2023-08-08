@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CalendarFeatureFacade } from '@libs/calendar/data-access/store/calendar-feature.facade';
+import { Observable } from 'rxjs';
+import { CalendarItemModel } from '@libs/calendar/utils/models/calendar-item.model';
 
 @Component({
     selector: 'app-calendar',
@@ -7,9 +9,13 @@ import { CalendarFeatureFacade } from '@libs/calendar/data-access/store/calendar
     styleUrls: ['./calendar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CalendarComponent {
-    constructor(private readonly calendarFeatureFacade: CalendarFeatureFacade) {
-        calendarFeatureFacade.load();
-        calendarFeatureFacade.transaction$.subscribe(console.warn);
+export class CalendarComponent implements OnInit {
+    public calendarItems$: Observable<CalendarItemModel[]>;
+
+    constructor(private readonly calendarFeatureFacade: CalendarFeatureFacade) {}
+
+    public ngOnInit(): void {
+        this.calendarFeatureFacade.load();
+        this.calendarItems$ = this.calendarFeatureFacade.calendarItems$;
     }
 }

@@ -6,7 +6,7 @@ import { fromFeatureQuerySelector } from '../feature.selectors';
 import { FEATURE_STATE_KEY } from '../feature.keys';
 import { CalendarDataState } from './calendar-data.state';
 import { fromCalendarDataAdapter } from './calendar-data.adapter';
-import { TransactionModel } from '@common/models';
+import { CalendarItemModel } from '@libs/calendar/utils/models/calendar-item.model';
 
 export namespace fromCalendarDataQuery {
     export const getState: MemoizedSelector<FeaturePartialState, CalendarDataState> = createSelector(
@@ -19,5 +19,5 @@ export namespace fromCalendarDataQuery {
         selectEntities: getEntities,
         selectIds: getIds,
         selectTotal: getTotal,
-    }: EntitySelectors<TransactionModel, FeaturePartialState> = fromCalendarDataAdapter.getSelectors(getState);
+    }: EntitySelectors<CalendarItemModel, FeaturePartialState> = fromCalendarDataAdapter.getSelectors(getState);
 }

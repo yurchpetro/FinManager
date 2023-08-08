@@ -8,6 +8,7 @@ import { AppFeatureFacade } from '@common/data-access';
 import { TransactionModel } from '@common/models';
 import { fromCalendarListQuery } from '../calendar-list/calendar-list.selectors';
 import { LoadTransactionService } from '@common/services';
+import { CreateCalendarItemService } from '@libs/calendar/utils/services/create-calendar-item.service';
 
 @Injectable()
 export class CalendarAsyncEffects {
@@ -25,7 +26,11 @@ export class CalendarAsyncEffects {
 
                 return this.loadTransactionService.onLoad(userId, mounth).pipe(
                     switchMap((response: TransactionModel[]) => {
-                        return [fromCalendarAsyncActions.LoadSuccess({ models: response })];
+                        return [
+                            fromCalendarAsyncActions.LoadSuccess({
+                                models: this.createCalendarItemService.createCalendarItems(response),
+                            }),
+                        ];
                     }),
                     catchError(err => of(fromCalendarAsyncActions.LoadError({ massage: err.toString() })))
                 );
@@ -37,6 +42,7 @@ export class CalendarAsyncEffects {
         private readonly store: Store<FeaturePartialState>,
         private readonly actions$: Actions,
         private readonly loadTransactionService: LoadTransactionService,
-        private readonly appFeatureFacade: AppFeatureFacade
+        private readonly appFeatureFacade: AppFeatureFacade,
+        private readonly createCalendarItemService: CreateCalendarItemService
     ) {}
 }

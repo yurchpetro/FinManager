@@ -2,35 +2,36 @@ import { createAction, props } from '@ngrx/store';
 
 import { ActionCreatorBy } from '@core';
 import { TransactionModel } from '@common/models';
+import { CalendarItemModel } from '@libs/calendar/utils/models/calendar-item.model';
 
 export namespace fromCalendarDataActions {
-    export const SetAllAction: ActionCreatorBy.Props<{ models: TransactionModel[] }> = createAction(
+    export const SetAllAction: ActionCreatorBy.Props<{ models: CalendarItemModel[] }> = createAction(
         '[Calendar Data] Set All',
-        props<{ models: TransactionModel[] }>()
+        props<{ models: CalendarItemModel[] }>()
     );
     export type SetAllAction = ReturnType<typeof SetAllAction>;
 
-    export const AddOneAction: ActionCreatorBy.Props<{ model: TransactionModel }> = createAction(
+    export const AddOneAction: ActionCreatorBy.Props<{ model: CalendarItemModel }> = createAction(
         '[Calendar Data] Add One',
-        props<{ model: TransactionModel }>()
+        props<{ model: CalendarItemModel }>()
     );
     export type AddOneAction = ReturnType<typeof AddOneAction>;
 
-    export const UpsertManyAction: ActionCreatorBy.Props<{ changes: TransactionModel[] }> = createAction(
+    export const UpsertManyAction: ActionCreatorBy.Props<{ changes: CalendarItemModel[] }> = createAction(
         '[Calendar Data] Upsert Many',
-        props<{ changes: TransactionModel[] }>()
+        props<{ changes: CalendarItemModel[] }>()
     );
     export type UpsertManyAction = ReturnType<typeof UpsertManyAction>;
 
-    export const UpdateOneAction: ActionCreatorBy.Props<{ id: string; changes: Partial<TransactionModel> }> =
-        createAction('[Calendar Data] Update One', props<{ id: string; changes: Partial<TransactionModel> }>());
+    export const UpdateOneAction: ActionCreatorBy.Props<{ id: string; changes: Partial<CalendarItemModel> }> =
+        createAction('[Calendar Data] Update One', props<{ id: string; changes: Partial<CalendarItemModel> }>());
     export type UpsertOneAction = ReturnType<typeof UpdateOneAction>;
 
     export const UpdateManyAction: ActionCreatorBy.Props<{
-        changes: Array<{ id: string; changes: Partial<TransactionModel> }>;
+        changes: Array<{ id: string; changes: Partial<CalendarItemModel> }>;
     }> = createAction(
         '[Calendar Data] Update Many',
-        props<{ changes: Array<{ id: string; changes: Partial<TransactionModel> }> }>()
+        props<{ changes: Array<{ id: string; changes: Partial<CalendarItemModel> }> }>()
     );
     export type UpdateManyAction = ReturnType<typeof UpdateManyAction>;
 

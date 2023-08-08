@@ -10,6 +10,7 @@ import { ModelStatus } from '@common/enums';
 import { fromCalendarAsyncQuery } from './calendar-async/calendar-async.selectors';
 import { fromCalendarAsyncActions } from './calendar-async/calendar-async.actions';
 import { fromCalendarDataQuery } from './calendar-data/calendar-data.selectors';
+import { CalendarItemModel } from '@libs/calendar/utils/models/calendar-item.model';
 
 @Injectable()
 export class CalendarFeatureFacade {
@@ -26,7 +27,7 @@ export class CalendarFeatureFacade {
         select(fromCalendarAsyncQuery.getErrorMassage)
     );
 
-    public readonly transaction$: Observable<TransactionModel[]> = this.store.pipe(
+    public readonly calendarItems$: Observable<CalendarItemModel[]> = this.store.pipe(
         select(fromCalendarDataQuery.getAll)
     );
 
