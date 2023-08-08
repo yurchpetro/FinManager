@@ -1,39 +1,16 @@
-<form [formGroup]="form">
-    <ion-list>
-        <ion-item>
-            <ion-input formControlName="name" label="Name"></ion-input>
-        </ion-item>
+<ng-container *ngIf="isModelOpen">
+    <app-create-edit-form
+        [isEditMode]="isEditMode"
+        [selectedTransaction]="selectedTransaction"
+        (closeModal)="onClose()"
+        (edit)="onUpdate($event)"
+        (create)="onCreate($event)"
+    ></app-create-edit-form>
+</ng-container>
 
-        <ion-item>
-            <ion-input formControlName="description" label="Description"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-input formControlName="category" label="Category"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-input formControlName="amount" type="number" label="Amount"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-input formControlName="date" label="Date"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-input formControlName="wallet" label="wallet"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-input formControlName="type" label="type"></ion-input>
-        </ion-item>
-    </ion-list>
-
-    <ion-button (click)="onCreate()" [disabled]="form.invalid">Create</ion-button>
-    <ion-button (click)="onUpdate()" [disabled]="form.invalid">Edit</ion-button>
-</form>
-
-<app-horizontal-select></app-horizontal-select>
+<div *ngIf="!isModelOpen" class="create__button">
+    <ion-button (click)="openModal()">Create</ion-button>
+</div>
 
 <ng-container *ngFor="let transaction of transactions$ | async">
     <app-transaction-item [transaction]="transaction" (edit)="onEdit($event)" (delete)="onDelete($event)"></app-transaction-item>
