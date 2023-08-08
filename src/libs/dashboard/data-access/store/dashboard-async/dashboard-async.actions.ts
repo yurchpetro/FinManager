@@ -37,9 +37,9 @@ export namespace fromDashboardAsyncActions {
     // Update
     // ================================
 
-    export const Update: ActionCreatorBy.Props<{ transaction: Partial<TransactionModel> }> = createAction(
+    export const Update: ActionCreatorBy.Props<{ transaction: TransactionModel }> = createAction(
         '[Dashboard Async] Update',
-        props<{ transaction: Partial<TransactionModel> }>()
+        props<{ transaction: TransactionModel }>()
     );
     export type Update = ReturnType<typeof Update>;
 

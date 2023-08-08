@@ -44,7 +44,7 @@ export class DashboardFeatureFacade {
         this.store.dispatch(fromDashboardAsyncActions.Create({ transaction }));
     }
 
-    public update(transaction: Partial<TransactionModel>): void {
+    public update(transaction: TransactionModel): void {
         this.store.dispatch(fromDashboardAsyncActions.Update({ transaction }));
     }
 

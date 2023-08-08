@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { from, Observable, take } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection, DocumentData } from '@angular/fire/compat/firestore';
 import { CreateTransactionModel, TransactionModel } from '@common/models';
-import { DASHBOARD_FIREBASE_CONFIG, IdGeneratorFunction } from '@common/utils';
+import { DASHBOARD_FIREBASE_CONFIG, GetMonthYearFunction, IdGeneratorFunction } from '@common/utils';
 import { map } from 'rxjs/operators';
 
 @Injectable()
@@ -35,19 +35,19 @@ export class DashboardFireService {
             this.userCol
                 .doc(userId)
                 .collection(DASHBOARD_FIREBASE_CONFIG.TRANSACTIONS)
-                .doc(mounth)
+                .doc(GetMonthYearFunction(transaction.date))
                 .collection(DASHBOARD_FIREBASE_CONFIG.TRANSACTION)
                 .doc(id)
                 .set({ ...transaction, id })
         );
     }
 
-    public onUpdate(userId: string, mounth: string, transaction: Partial<TransactionModel>): Observable<void> {
+    public onUpdate(userId: string, mounth: string, transaction: TransactionModel): Observable<void> {
         return from(
             this.userCol
                 .doc(userId)
                 .collection(DASHBOARD_FIREBASE_CONFIG.TRANSACTIONS)
-                .doc(mounth)
+                .doc(GetMonthYearFunction(transaction.date))
                 .collection(DASHBOARD_FIREBASE_CONFIG.TRANSACTION)
                 .doc(transaction.id)
                 .update({ ...transaction })
