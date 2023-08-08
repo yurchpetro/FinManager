@@ -5,7 +5,7 @@ export interface CreateTransactionModel {
     description: string;
     category: string;
     amount: number;
-    date: Date;
+    date: number;
     wallet: string;
     type: TransactionType;
 }

@@ -1,6 +1,6 @@
 <ion-card class="card">
     <div class="card__icon">
-        <p>icon</p>
+        <app-icon [iconType]="icon.icon" [color]="icon.color"></app-icon>
     </div>
 
     <div class="card__content">
@@ -22,7 +22,7 @@
 
             <div>
                 <p>{{ transaction.date | date: 'mm:ss' }}</p>
-                <p>{{ transaction.amount }}</p>
+                <p>{{ transaction.amount | currency}}</p>
             </div>
         </ion-card-content>
     </div>

@@ -6,7 +6,7 @@ export interface CreateTransformModel {
     description: AbstractControl<string | null>;
     category: AbstractControl<string | null>;
     amount: AbstractControl<number | null>;
-    date: AbstractControl<Date | null>;
+    date: AbstractControl<number | null>;
     wallet: AbstractControl<string | null>;
     type: AbstractControl<TransactionType | null>;
 }

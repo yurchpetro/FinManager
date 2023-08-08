@@ -1,0 +1,46 @@
+<form [formGroup]="form">
+    <div>
+        <ion-item>
+            <ion-input formControlName="name" label="Name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-input formControlName="description" label="Description"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-select formControlName="type" label="Type" placeholder="Type">
+                <ion-select-option
+                    *ngFor="let option of (TRANSACTION_TYPE_ENUM | keyvalue)"
+                    [value]="option.value"
+                >
+                    {{ option.value | titlecase }}
+                </ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ng-container *ngIf="form.controls.type.value !== TRANSACTION_TYPE_ENUM.TRANSACTION">
+            <ion-item>
+                <ion-select formControlName="category" label="Category" placeholder="Category">
+                    <ion-select-option
+                        *ngFor="let option of (form.controls.type.value === TRANSACTION_TYPE_ENUM.INCOME ? incomeCategoryConst : expenseCategoryConst )"
+                        [value]="option.name"
+                    >
+                        {{ option.name | titlecase }}
+                    </ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ng-container>
+
+        <ion-item>
+            <ion-input formControlName="amount" type="number" label="Amount"></ion-input>
+        </ion-item>
+
+        <app-datepicker formControlName="date" [label]="'Date'"></app-datepicker>
+    </div>
+
+    <div class="action">
+        <ion-button color="danger" (click)="onClose()">Cancel</ion-button>
+        <ion-button (click)="onSubmit()" [disabled]="form.invalid">{{ isEditMode ? 'Edit' : 'Create' }}</ion-button>
+    </div>
+</form>
