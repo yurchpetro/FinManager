@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CalendarComponent } from '@pages/calendar/calendar.component';
 import { CalendarRoutingModule } from '@pages/calendar/calendar-routing.module';
 import { IonicModule } from '@ionic/angular';
-import { HorizontalSelectComponent } from '@common/components';
+import { HorizontalSelectComponent, LoaderComponent } from '@common/components';
 import { CalendarUiModule } from '@libs/calendar/ui/calendar-ui.module';
 import { CalendarDataAccessModule } from '@libs/calendar/data-access/calendar-data-access.module';
 
@@ -17,6 +17,7 @@ import { CalendarDataAccessModule } from '@libs/calendar/data-access/calendar-da
         HorizontalSelectComponent,
         CalendarUiModule,
         CalendarDataAccessModule,
+        LoaderComponent,
     ],
     providers: [],
 })

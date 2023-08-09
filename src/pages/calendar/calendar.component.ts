@@ -14,12 +14,14 @@ export class CalendarComponent implements OnInit {
     public calendarItems$: Observable<CalendarItemModel[]>;
     public mounth$: Observable<number>;
     public mounthSummary$: Observable<SummaryModel>;
+    public isLoading$: Observable<boolean>;
 
     constructor(private readonly calendarFeatureFacade: CalendarFeatureFacade) {}
 
     public ngOnInit(): void {
         this.calendarFeatureFacade.load();
         this.calendarItems$ = this.calendarFeatureFacade.calendarItems$;
+        this.isLoading$ = this.calendarFeatureFacade.loading$;
         this.mounth$ = this.calendarFeatureFacade.mounth$.pipe(
             map((value: string) => {
                 const date: string[] = value.split('-');

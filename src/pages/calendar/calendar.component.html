@@ -3,3 +3,5 @@
 <app-mounth-summary [summary]="(mounthSummary$ | async)!"></app-mounth-summary>
 
 <app-calendar-table [calendarItems]="(calendarItems$ | async)!"></app-calendar-table>
+
+<app-loader *ngIf="isLoading$ | async"></app-loader>

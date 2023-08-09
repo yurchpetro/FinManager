@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { SETTING_ITEM_ENUM } from '@libs/settings/utils';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-settings',
@@ -7,6 +8,9 @@ import { SETTING_ITEM_ENUM } from '@libs/settings/utils';
     styleUrls: ['./settings.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SettingsComponent {
+export class SettingsComponent implements OnInit {
+    public isLoading$: Observable<boolean>;
     public readonly SETTING_ITEM_ENUM: typeof SETTING_ITEM_ENUM = SETTING_ITEM_ENUM;
+
+    public ngOnInit(): void {}
 }

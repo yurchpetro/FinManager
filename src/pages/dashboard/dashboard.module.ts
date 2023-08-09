@@ -6,7 +6,7 @@ import { DashboardUiModule } from '@libs/dashboard/ui/dashboard-ui.module';
 import { DashboardDataAccessModule } from '@libs/dashboard/data-access/dashboard-data-access.module';
 import { IonicModule } from '@ionic/angular';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HorizontalSelectComponent, DatepickerComponent } from '@common/components';
+import { HorizontalSelectComponent, DatepickerComponent, LoaderComponent } from '@common/components';
 
 @NgModule({
     declarations: [DashboardComponent],
@@ -19,6 +19,7 @@ import { HorizontalSelectComponent, DatepickerComponent } from '@common/componen
         ReactiveFormsModule,
         HorizontalSelectComponent,
         DatepickerComponent,
+        LoaderComponent,
     ],
     providers: [],
 })

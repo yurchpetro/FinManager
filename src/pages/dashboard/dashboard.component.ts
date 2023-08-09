@@ -12,6 +12,7 @@ import { filter, Observable, Subject, takeUntil } from 'rxjs';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
     public transactions$: Observable<TransactionModel[]>;
+    public isLoading$: Observable<boolean>;
     public selectedTransaction: TransactionModel;
     public isModelOpen: boolean = false;
     public isEditMode: boolean = false;
@@ -23,6 +24,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public ngOnInit(): void {
         this.dashboardFeatureFacade.load();
         this.transactions$ = this.dashboardFeatureFacade.transaction$;
+        this.isLoading$ = this.dashboardFeatureFacade.loading$;
         this.dashboardFeatureFacade.upsertLoading$
             .pipe(
                 filter((status: ModelStatus): boolean => status === ModelStatus.Success),
