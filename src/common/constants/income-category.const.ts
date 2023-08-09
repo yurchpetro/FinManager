@@ -4,21 +4,21 @@ export const IncomeCategoryConst: CategoryModel[] = [
     {
         name: 'salary',
         icon: 'cash-outline',
-        color: '#ffc409',
+        color: '#008000',
     },
     {
         name: 'award',
         icon: 'trophy-outline',
-        color: '#ffc409',
+        color: '#00A600',
     },
     {
         name: 'bonus',
         icon: 'ribbon-outline',
-        color: '#ffc409',
+        color: '#00C400',
     },
     {
         name: 'bonus',
         icon: 'ribbon-outline',
-        color: '#ffc409',
+        color: '#006400',
     },
 ];
