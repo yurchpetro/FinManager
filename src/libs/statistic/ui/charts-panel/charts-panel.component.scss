@@ -1,0 +1,34 @@
+.selector {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 33%;
+
+        height: 40px;
+        border-radius: 20px;
+        border: 1px solid gray;
+        margin: 0 5px;
+
+        &--active {
+            background-color: red;
+            border: 1px solid red;
+            color: white;
+        }
+    }
+}
+
+.chart {
+    margin-top: 40px;
+}

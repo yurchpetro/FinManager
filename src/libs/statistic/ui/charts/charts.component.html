@@ -1,0 +1,23 @@
+<div class="chart">
+    <div class="diagram">
+        <app-diagram
+            [labels]="labels"
+            [backgroundColor]="backgroundColor"
+            [data]="data"
+            [mounth]="(mounth | date: dateFormat)!"
+        ></app-diagram>
+    </div>
+
+    <div class="legend">
+        <p class="legend__title">Categories</p>
+
+        <ng-container *ngFor="let category of categories">
+            <div class="legend__item">
+                <div class="legend__item--point" [style.background-color]="category.color"></div>
+                {{ category.category | titlecase }}
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+

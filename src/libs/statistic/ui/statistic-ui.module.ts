@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { IonicModule } from '@ionic/angular';
-import { DiagramComponent } from '@libs/statistic/ui/diagram/diagram.component';
+import { DiagramComponent } from './diagram/diagram.component';
+import { ChartsComponent } from './charts/charts.component';
+import { ChartsPanelComponent } from './charts-panel/charts-panel.component';
 
 @NgModule({
-    declarations: [DiagramComponent],
+    declarations: [DiagramComponent, ChartsComponent, ChartsPanelComponent],
     imports: [CommonModule, IonicModule],
-    exports: [DiagramComponent],
+    exports: [ChartsPanelComponent],
 })
 export class StatisticUiModule {}

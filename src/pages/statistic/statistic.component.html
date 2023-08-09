@@ -1,2 +1,3 @@
-<app-horizontal-select [title]="'title'"></app-horizontal-select>
-<app-diagram></app-diagram>
+<app-horizontal-select [title]="(mounth$ | async)!" [dateFormat]="'MMMM yyyy'" (left)="previousMonth()" (right)="nextMounth()"></app-horizontal-select>
+
+<app-charts-panel [statisticItems]="(statisticItems$ | async)!" [mounth]="(mounth$ | async)!"></app-charts-panel>

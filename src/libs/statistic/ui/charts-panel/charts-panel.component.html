@@ -1,0 +1,32 @@
+<div class="selector__wrapper">
+    <div class="selector">
+        <div
+            class="selector__item"
+            [class.selector__item--active]="selectedCategory === 'expense'"
+            (click)="onExpense()"
+        >
+            Expense
+        </div>
+
+        <div
+            class="selector__item"
+            [class.selector__item--active]="selectedCategory === 'income'"
+            (click)="onIncome()"
+        >
+            Income
+        </div>
+
+        <div
+            class="selector__item"
+            [class.selector__item--active]="selectedCategory === 'all'"
+            (click)="onAll()"
+        >
+            All
+        </div>
+    </div>
+</div>
+
+<div class="chart">
+    <app-charts [statisticItems]="selectedStatistic" [mounth]="mounth"></app-charts>
+</div>
+
