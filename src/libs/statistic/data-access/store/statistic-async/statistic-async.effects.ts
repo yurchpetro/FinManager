@@ -11,6 +11,7 @@ import { TransactionModel } from '@common/models';
 import { LoadTransactionService } from '@common/services';
 import { map } from 'rxjs/operators';
 import { fromStatisticListActions } from '../statistic-list/statistic-list.actions';
+import { CreateStatisticModelService } from '@libs/statistic/utils/service/create-statistic-model.service';
 
 @Injectable()
 export class StatisticAsyncEffects {
@@ -28,7 +29,11 @@ export class StatisticAsyncEffects {
 
                 return this.loadTransactionService.onLoad(userId, mounth).pipe(
                     switchMap((response: TransactionModel[]) => {
-                        return [fromStatisticAsyncActions.LoadSuccess({ models: response })];
+                        return [
+                            fromStatisticAsyncActions.LoadSuccess({
+                                models: this.createStatisticModelService.createStatisticItem(response),
+                            }),
+                        ];
                     }),
                     catchError(err => of(fromStatisticAsyncActions.LoadError({ massage: err.toString() })))
                 );
@@ -58,6 +63,7 @@ export class StatisticAsyncEffects {
         private readonly store: Store<FeaturePartialState>,
         private readonly actions$: Actions,
         private readonly loadTransactionService: LoadTransactionService,
-        private readonly appFeatureFacade: AppFeatureFacade
+        private readonly appFeatureFacade: AppFeatureFacade,
+        private readonly createStatisticModelService: CreateStatisticModelService
     ) {}
 }

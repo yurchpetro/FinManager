@@ -3,12 +3,12 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { FeaturePartialState } from './feature.state';
 import { ModelStatus } from '@common/enums';
-import { TransactionModel } from '@common/models';
 import { fromStatisticAsyncQuery } from './statistic-async/statistic-async.selectors';
 import { fromStatisticDataQuery } from './statistic-data/statistic-data.selectors';
 import { fromStatisticAsyncActions } from './statistic-async/statistic-async.actions';
 import { fromStatisticListQuery } from './statistic-list/statistic-list.selectors';
 import { fromStatisticListActions } from './statistic-list/statistic-list.actions';
+import { StatisticItemModel } from '@libs/statistic/utils/model/statistic-item.model';
 
 @Injectable()
 export class StatisticFeatureFacade {
@@ -17,6 +17,7 @@ export class StatisticFeatureFacade {
     // ================================
 
     public readonly mounth$: Observable<string> = this.store.pipe(select(fromStatisticListQuery.getMounth));
+
     // ================================
     // Async Selectors
     // ================================
@@ -30,7 +31,7 @@ export class StatisticFeatureFacade {
         select(fromStatisticAsyncQuery.getErrorMassage)
     );
 
-    public readonly transaction$: Observable<TransactionModel[]> = this.store.pipe(
+    public readonly statisticItems$: Observable<StatisticItemModel[]> = this.store.pipe(
         select(fromStatisticDataQuery.getAll)
     );
 

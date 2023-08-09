@@ -6,7 +6,7 @@ import { fromFeatureQuerySelector } from '../feature.selectors';
 import { FEATURE_STATE_KEY } from '../feature.keys';
 import { StatisticDataState } from './statistic-data.state';
 import { fromStatisticDataAdapter } from './statistic-data.adapter';
-import { TransactionModel } from '@common/models';
+import { StatisticItemModel } from '@libs/statistic/utils/model/statistic-item.model';
 
 export namespace fromStatisticDataQuery {
     export const getState: MemoizedSelector<FeaturePartialState, StatisticDataState> = createSelector(
@@ -19,5 +19,5 @@ export namespace fromStatisticDataQuery {
         selectEntities: getEntities,
         selectIds: getIds,
         selectTotal: getTotal,
-    }: EntitySelectors<TransactionModel, FeaturePartialState> = fromStatisticDataAdapter.getSelectors(getState);
+    }: EntitySelectors<StatisticItemModel, FeaturePartialState> = fromStatisticDataAdapter.getSelectors(getState);
 }

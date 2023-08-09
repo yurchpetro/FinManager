@@ -1,8 +1,8 @@
 import { EntityState } from '@ngrx/entity';
 
 import { fromStatisticDataAdapter } from './statistic-data.adapter';
-import { TransactionModel } from '@common/models';
+import { StatisticItemModel } from '@libs/statistic/utils/model/statistic-item.model';
 
-export type StatisticDataState = EntityState<TransactionModel>;
+export type StatisticDataState = EntityState<StatisticItemModel>;
 
 export const initialStatisticDataState: StatisticDataState = fromStatisticDataAdapter.getInitialState();
