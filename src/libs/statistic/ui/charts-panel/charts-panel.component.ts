@@ -34,6 +34,10 @@ export class ChartsPanelComponent implements OnInit, OnChanges {
 
             if (this.selectedCategory === 'expense') {
                 this.onExpense();
+            } else if (this.selectedCategory === 'income') {
+                this.onIncome();
+            } else {
+                this.onAll();
             }
         }
     }

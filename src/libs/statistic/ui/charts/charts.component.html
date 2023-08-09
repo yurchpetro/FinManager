@@ -1,23 +1,30 @@
-<div class="chart">
-    <div class="diagram">
-        <app-diagram
-            [labels]="labels"
-            [backgroundColor]="backgroundColor"
-            [data]="data"
-            [mounth]="(mounth | date: dateFormat)!"
-        ></app-diagram>
-    </div>
+<ng-container *ngIf="statisticItems.length; else noData">
+    <div class="chart">
+        <div class="diagram">
+            <app-diagram
+                [labels]="labels"
+                [backgroundColor]="backgroundColor"
+                [data]="data"
+                [mounth]="(mounth | date: dateFormat)!"
+            ></app-diagram>
+        </div>
 
-    <div class="legend">
-        <p class="legend__title">Categories</p>
+        <div class="legend">
+            <p class="legend__title">Categories</p>
 
-        <ng-container *ngFor="let category of categories">
-            <div class="legend__item">
-                <div class="legend__item--point" [style.background-color]="category.color"></div>
-                {{ category.category | titlecase }}
-            </div>
-        </ng-container>
+            <ng-container *ngFor="let category of categories">
+                <div class="legend__item">
+                    <div class="legend__item--point" [style.background-color]="category.color"></div>
+                    {{ category.category | titlecase }}
+                </div>
+            </ng-container>
+        </div>
     </div>
-</div>
+</ng-container>
+
+<ng-template #noData>
+    <app-no-data></app-no-data>
+</ng-template>
+
 
 

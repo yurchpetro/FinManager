@@ -29,6 +29,7 @@ export class DiagramComponent implements OnInit, OnChanges {
 
     public ngOnInit(): void {
         this.createChart();
+        this.updateChart();
     }
 
     public ngOnChanges(changes: SimpleChanges): void {
