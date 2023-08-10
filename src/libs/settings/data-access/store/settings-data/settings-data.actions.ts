@@ -1,44 +1,26 @@
 import { createAction, props } from '@ngrx/store';
 
 import { ActionCreatorBy } from '@core';
-import { CalendarItemModel } from '@libs/calendar/utils/models/calendar-item.model';
+import { SettingsStateModel } from '@libs/settings/utils';
 
 export namespace fromSettingsDataActions {
-    export const SetAllAction: ActionCreatorBy.Props<{ models: CalendarItemModel[] }> = createAction(
-        '[Settings Data] Set All',
-        props<{ models: CalendarItemModel[] }>()
+    export const SetSettingsAction: ActionCreatorBy.Props<{ models: SettingsStateModel }> = createAction(
+        '[Settings Data] Set All Settings',
+        props<{ models: SettingsStateModel }>()
     );
-    export type SetAllAction = ReturnType<typeof SetAllAction>;
+    export type SetSettingsAction = ReturnType<typeof SetSettingsAction>;
 
-    export const AddOneAction: ActionCreatorBy.Props<{ model: CalendarItemModel }> = createAction(
-        '[Settings Data] Add One',
-        props<{ model: CalendarItemModel }>()
+    export const SetCurrencyAction: ActionCreatorBy.Props<{ currency: string }> = createAction(
+        '[Settings Data] Set Currency Settings',
+        props<{ currency: string }>()
     );
-    export type AddOneAction = ReturnType<typeof AddOneAction>;
+    export type SetCurrencyAction = ReturnType<typeof SetCurrencyAction>;
 
-    export const UpsertManyAction: ActionCreatorBy.Props<{ changes: CalendarItemModel[] }> = createAction(
-        '[Settings Data] Upsert Many',
-        props<{ changes: CalendarItemModel[] }>()
+    export const SetDateFormatAction: ActionCreatorBy.Props<{ dateFormat: string }> = createAction(
+        '[Settings Data] Set DateFormat Settings',
+        props<{ dateFormat: string }>()
     );
-    export type UpsertManyAction = ReturnType<typeof UpsertManyAction>;
-
-    export const UpdateOneAction: ActionCreatorBy.Props<{ id: string; changes: Partial<CalendarItemModel> }> =
-        createAction('[Settings Data] Update One', props<{ id: string; changes: Partial<CalendarItemModel> }>());
-    export type UpsertOneAction = ReturnType<typeof UpdateOneAction>;
-
-    export const UpdateManyAction: ActionCreatorBy.Props<{
-        changes: Array<{ id: string; changes: Partial<CalendarItemModel> }>;
-    }> = createAction(
-        '[Settings Data] Update Many',
-        props<{ changes: Array<{ id: string; changes: Partial<CalendarItemModel> }> }>()
-    );
-    export type UpdateManyAction = ReturnType<typeof UpdateManyAction>;
-
-    export const RemoveOneAction: ActionCreatorBy.Props<{ id: string }> = createAction(
-        '[Settings Data] Remove One',
-        props<{ id: string }>()
-    );
-    export type RemoveOneAction = ReturnType<typeof RemoveOneAction>;
+    export type SetDateFormatAction = ReturnType<typeof SetDateFormatAction>;
 
     export const ClearAction: ActionCreatorBy.Type = createAction('[Settings Data] Clear');
 }

@@ -3,32 +3,29 @@ import { Action, select, Store } from '@ngrx/store';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { FeaturePartialState } from '../feature.state';
 import { catchError, Observable, of, switchMap } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { fromSettingsAsyncActions } from './settings-async.actions';
 import { AppFeatureFacade } from '@common/data-access';
-import { TransactionModel } from '@common/models';
-import { fromSettingsListQuery } from '@libs/settings/data-access/store/settings-list/settings-list.selectors';
-import { LoadTransactionService } from '@common/services';
-import { CreateCalendarItemService } from '@libs/calendar/utils/services/create-calendar-item.service';
+import { SettingsFirebaseService } from '../../services/settings-firebase.service';
+import { SettingsStateModel } from '@libs/settings/utils';
+import { fromSettingsDataQuery } from '../settings-data/settings-data.selectors';
 
 @Injectable()
 export class SettingsAsyncEffects {
     public readonly onLoad$: Observable<Action> = createEffect(() =>
         this.actions$.pipe(
             ofType(fromSettingsAsyncActions.Load),
-            concatLatestFrom(() => [
-                this.store.pipe(select(fromSettingsListQuery.getMounth)),
-                this.appFeatureFacade.currentUserId$,
-            ]),
-            switchMap(([action, mounth, userId]: [fromSettingsAsyncActions.Load, string, string | null]) => {
+            concatLatestFrom(() => [this.appFeatureFacade.currentUserId$]),
+            switchMap(([action, userId]: [fromSettingsAsyncActions.Load, string | null]) => {
                 if (!userId) {
                     return of(fromSettingsAsyncActions.LoadError({ massage: 'Please Log In' }));
                 }
 
-                return this.loadTransactionService.onLoad(userId, mounth).pipe(
-                    switchMap((response: TransactionModel[]) => {
+                return this.settingsFirebaseService.onLoad(userId).pipe(
+                    switchMap((response: SettingsStateModel) => {
                         return [
                             fromSettingsAsyncActions.LoadSuccess({
-                                models: this.createCalendarItemService.createCalendarItems(response),
+                                settings: response,
                             }),
                         ];
                     }),
@@ -38,11 +35,32 @@ export class SettingsAsyncEffects {
         )
     );
 
+    public readonly onUpdate$: Observable<Action> = createEffect(() =>
+        this.actions$.pipe(
+            ofType(fromSettingsAsyncActions.Update),
+            concatLatestFrom(() => [
+                this.appFeatureFacade.currentUserId$,
+                this.store.pipe(select(fromSettingsDataQuery.getState)),
+            ]),
+            switchMap(
+                ([action, userId, setting]: [fromSettingsAsyncActions.Update, string | null, SettingsStateModel]) => {
+                    if (!userId) {
+                        return of(fromSettingsAsyncActions.UpdateError({ massage: 'Please Log In' }));
+                    }
+
+                    return this.settingsFirebaseService.onUpdate(userId, setting).pipe(
+                        map(() => fromSettingsAsyncActions.UpdateSuccess()),
+                        catchError(err => of(fromSettingsAsyncActions.UpdateError({ massage: err.toString() })))
+                    );
+                }
+            )
+        )
+    );
+
     constructor(
         private readonly store: Store<FeaturePartialState>,
         private readonly actions$: Actions,
-        private readonly loadTransactionService: LoadTransactionService,
-        private readonly appFeatureFacade: AppFeatureFacade,
-        private readonly createCalendarItemService: CreateCalendarItemService
+        private readonly settingsFirebaseService: SettingsFirebaseService,
+        private readonly appFeatureFacade: AppFeatureFacade
     ) {}
 }

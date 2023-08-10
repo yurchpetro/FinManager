@@ -1,5 +1,11 @@
-<!--<app-setting-item [title]="'POINTER'" [actionType]="SETTING_ITEM_ENUM.POINTER"></app-setting-item>-->
-<!--<app-setting-item [title]="'TOGGLE'" [toggleChacked]="true" [actionType]="SETTING_ITEM_ENUM.TOGGLE"></app-setting-item>-->
+<app-setting-item
+    [title]="'Data Format'"
+    [selectDefault]="(selectedDateFormat$ | async)!"
+    [selectOption]="dateFormatConstant"
+    [actionType]="SETTING_ITEM_ENUM.SELECT"
+    (submit)="onDateFormat($event)"
+></app-setting-item>
+
 <app-setting-item
     [title]="'Data Format'"
     [selectDefault]="dateFormatConstant[0]"

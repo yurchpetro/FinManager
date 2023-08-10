@@ -3,7 +3,6 @@
         <ng-container *ngSwitchCase="SETTING_ITEM_ENUM.SELECT">
             <ion-select [label]="title" [placeholder]="selectDefault.viewValue" (ionChange)="onSelect($event)">
                 <ion-select-option
-                    style="background: red"
                     *ngFor="let option of selectOption"
                     [value]="option.value"
                 >

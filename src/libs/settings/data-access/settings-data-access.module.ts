@@ -6,10 +6,10 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { FEATURE_KEY } from './store/feature.keys';
 import { featureReducers } from './store/feature.reducers';
-import { SettingsListEffects } from '@libs/settings/data-access/store/settings-list/settings-list.effects';
-import { SettingsAsyncEffects } from '@libs/settings/data-access/store/settings-async/settings-async.effects';
-import { SettingsDataEffects } from '@libs/settings/data-access/store/settings-data/settings-data.effects';
-import { CreateCalendarItemService } from '@libs/calendar/utils/services/create-calendar-item.service';
+import { SettingsListEffects } from './store/settings-list/settings-list.effects';
+import { SettingsAsyncEffects } from './store/settings-async/settings-async.effects';
+import { SettingsDataEffects } from './store/settings-data/settings-data.effects';
+import { SettingsFirebaseService } from './services/settings-firebase.service';
 
 @NgModule({
     imports: [
@@ -17,6 +17,6 @@ import { CreateCalendarItemService } from '@libs/calendar/utils/services/create-
         StoreModule.forFeature(FEATURE_KEY.FEATURE, featureReducers),
         EffectsModule.forFeature([SettingsListEffects, SettingsAsyncEffects, SettingsDataEffects]),
     ],
-    providers: [SettingsFeatureFacade, LoadTransactionService, CreateCalendarItemService],
+    providers: [SettingsFeatureFacade, LoadTransactionService, SettingsFirebaseService],
 })
 export class SettingsDataAccessModule {}

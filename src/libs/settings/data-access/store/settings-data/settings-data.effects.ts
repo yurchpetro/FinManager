@@ -14,8 +14,26 @@ export class SettingsDataEffects {
     public readonly onAsyncLoadSuccess$: Observable<Action> = createEffect(() =>
         this.actions$.pipe(
             ofType(fromSettingsAsyncActions.LoadSuccess),
-            map(({ models }: fromSettingsAsyncActions.LoadSuccess) => {
-                return fromSettingsDataActions.SetAllAction({ models });
+            map(({ settings }: fromSettingsAsyncActions.LoadSuccess) => {
+                return fromSettingsDataActions.SetSettingsAction({ models: settings });
+            })
+        )
+    );
+
+    public readonly onSetCurrency$: Observable<Action> = createEffect(() =>
+        this.actions$.pipe(
+            ofType(fromSettingsDataActions.SetCurrencyAction),
+            map((action: fromSettingsDataActions.SetCurrencyAction) => {
+                return fromSettingsAsyncActions.Update();
+            })
+        )
+    );
+
+    public readonly onSetDateFormat$: Observable<Action> = createEffect(() =>
+        this.actions$.pipe(
+            ofType(fromSettingsDataActions.SetDateFormatAction),
+            map((action: fromSettingsDataActions.SetDateFormatAction) => {
+                return fromSettingsAsyncActions.Update();
             })
         )
     );

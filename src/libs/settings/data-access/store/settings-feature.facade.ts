@@ -6,12 +6,13 @@ import { Observable } from 'rxjs';
 import { FeaturePartialState } from './feature.state';
 
 import { ModelStatus } from '@common/enums';
-import { fromSettingsAsyncQuery } from '@libs/settings/data-access/store/settings-async/settings-async.selectors';
-import { fromSettingsAsyncActions } from '@libs/settings/data-access/store/settings-async/settings-async.actions';
-import { fromSettingsDataQuery } from '@libs/settings/data-access/store/settings-data/settings-data.selectors';
-import { CalendarItemModel } from '@libs/calendar/utils/models/calendar-item.model';
-import { fromSettingsListActions } from '@libs/settings/data-access/store/settings-list/settings-list.actions';
-import { fromSettingsListQuery } from '@libs/settings/data-access/store/settings-list/settings-list.selectors';
+import { fromSettingsAsyncQuery } from './settings-async/settings-async.selectors';
+import { fromSettingsAsyncActions } from './settings-async/settings-async.actions';
+import { fromSettingsDataQuery } from './settings-data/settings-data.selectors';
+import { fromSettingsListActions } from './settings-list/settings-list.actions';
+import { fromSettingsListQuery } from './settings-list/settings-list.selectors';
+import { fromSettingsDataActions } from './settings-data/settings-data.actions';
+import { SettingsStateModel } from '@libs/settings/utils';
 
 @Injectable()
 export class SettingsFeatureFacade {
@@ -34,6 +35,14 @@ export class SettingsFeatureFacade {
         select(fromSettingsAsyncQuery.getErrorMassage)
     );
 
+    // ================================
+    // Date Selectors
+    // ================================
+
+    public readonly settings$: Observable<SettingsStateModel> = this.store.pipe(select(fromSettingsDataQuery.getState));
+    public readonly currency$: Observable<string> = this.store.pipe(select(fromSettingsDataQuery.getCurrency));
+    public readonly dateFormat$: Observable<string> = this.store.pipe(select(fromSettingsDataQuery.getDateFormat));
+
     constructor(private readonly store: Store<FeaturePartialState>) {}
 
     // ================================
@@ -54,5 +63,17 @@ export class SettingsFeatureFacade {
 
     public load(): void {
         this.store.dispatch(fromSettingsAsyncActions.Load());
+    }
+
+    // ================================
+    // Date Actions
+    // ================================
+
+    public setCurrency(currency: string): void {
+        this.store.dispatch(fromSettingsDataActions.SetCurrencyAction({ currency }));
+    }
+
+    public setDateFormat(dateFormat: string): void {
+        this.store.dispatch(fromSettingsDataActions.SetDateFormatAction({ dateFormat }));
     }
 }

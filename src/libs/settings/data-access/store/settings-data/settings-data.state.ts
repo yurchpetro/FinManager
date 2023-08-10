@@ -1,9 +1,6 @@
-import { dateFormatConstant } from '@libs/settings/utils';
+import { dateFormatConstant, SettingsStateModel } from '@libs/settings/utils';
 
-export interface SettingsDataState {
-    dateFormat: string;
-    currency: string;
-}
+export type SettingsDataState = SettingsStateModel;
 
 export const initialSettingsDataState: SettingsDataState = {
     dateFormat: dateFormatConstant[0].value,
