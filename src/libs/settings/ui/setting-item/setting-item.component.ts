@@ -39,7 +39,7 @@ export class SettingItemComponent implements OnInit {
     @Input() public selectDefault: SelectModel;
     @Input() public toggleChacked: boolean;
 
-    @Output() public submit: EventEmitter<string> = new EventEmitter<string>();
+    @Output() public submitData: EventEmitter<string> = new EventEmitter<string>();
 
     public readonly SETTING_ITEM_ENUM: typeof SETTING_ITEM_ENUM = SETTING_ITEM_ENUM;
 
@@ -67,7 +67,7 @@ export class SettingItemComponent implements OnInit {
     public onSelect(event: Event): void {
         const value: string = (event as CustomEvent).detail.value;
         this.control.setValue(value);
-        this.submit.emit(value);
+        this.submitData.emit(value);
     }
 
     // ––––––––––––– Value Accessor –––––––––––––––

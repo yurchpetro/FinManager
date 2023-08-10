@@ -3,15 +3,15 @@
     [selectDefault]="(selectedDateFormat$ | async)!"
     [selectOption]="dateFormatConstant"
     [actionType]="SETTING_ITEM_ENUM.SELECT"
-    (submit)="onDateFormat($event)"
+    (submitData)="onDateFormat($event)"
 ></app-setting-item>
 
 <app-setting-item
-    [title]="'Data Format'"
-    [selectDefault]="dateFormatConstant[0]"
-    [selectOption]="dateFormatConstant"
+    [title]="'Currency'"
+    [selectDefault]="(selectedCurrency$ | async)!"
+    [selectOption]="currencyConstant"
     [actionType]="SETTING_ITEM_ENUM.SELECT"
-    (submit)="onDateFormat($event)"
+    (submitData)="onCurrency($event)"
 ></app-setting-item>
 
 <app-loader *ngIf="isLoading$ | async"></app-loader>
