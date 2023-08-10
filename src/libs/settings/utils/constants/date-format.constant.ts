@@ -1,6 +1,6 @@
-import { DateFormatItemModel } from '@libs/settings/utils/models/date-format-item.model';
+import { SelectModel } from '@common/models';
 
-export const dateFormatConstant: DateFormatItemModel[] = [
+export const dateFormatConstant: SelectModel[] = [
     {
         viewValue: 'European - DD.MM.YYYY',
         value: 'dd.MM.yyyy',

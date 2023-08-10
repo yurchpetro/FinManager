@@ -1,12 +1,13 @@
 <ion-item class="item">
     <ng-container [ngSwitch]="actionType">
         <ng-container *ngSwitchCase="SETTING_ITEM_ENUM.SELECT">
-            <ion-select [label]="title" [placeholder]="selectDefault ?? selectOption[0]">
+            <ion-select [label]="title" [placeholder]="selectDefault.viewValue" (ionChange)="onSelect($event)">
                 <ion-select-option
+                    style="background: red"
                     *ngFor="let option of selectOption"
-                    [value]="option"
+                    [value]="option.value"
                 >
-                    {{ option }}
+                    {{ option.viewValue }}
                 </ion-select-option>
             </ion-select>
         </ng-container>
@@ -18,7 +19,7 @@
 
         <ng-container *ngSwitchCase="SETTING_ITEM_ENUM.TOGGLE">
             <ng-container *ngTemplateOutlet="labelRef"></ng-container>
-            <ion-toggle [checked]="toggleChacked"></ion-toggle>
+            <ion-toggle [formControl]="control" [checked]="toggleChacked"></ion-toggle>
         </ng-container>
     </ng-container>
 </ion-item>

@@ -1,4 +1,4 @@
-import { dateFormatConstant } from '@libs/settings/utils/constants/date-format.constant';
+import { dateFormatConstant } from '@libs/settings/utils';
 
 export interface SettingsDataState {
     dateFormat: string;
