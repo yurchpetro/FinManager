@@ -12,8 +12,10 @@
         </ng-container>
 
         <ng-container *ngSwitchCase="SETTING_ITEM_ENUM.POINTER">
-            <ng-container *ngTemplateOutlet="labelRef"></ng-container>
-            <div>left</div>
+            <div class="pointer" (click)="openPointer()">
+                <ng-container *ngTemplateOutlet="labelRef"></ng-container>
+                <ion-icon [class.pointer__icon--rotate]="isPointerOpen" name="chevron-forward-outline"></ion-icon>
+            </div>
         </ng-container>
 
         <ng-container *ngSwitchCase="SETTING_ITEM_ENUM.TOGGLE">
@@ -22,6 +24,12 @@
         </ng-container>
     </ng-container>
 </ion-item>
+
+<ng-container *ngIf="isPointerOpen">
+    <div class="pointer__open">
+        <ng-content></ng-content>
+    </div>
+</ng-container>
 
 <ng-template #labelRef>
     <ion-label>{{ title }}</ion-label>

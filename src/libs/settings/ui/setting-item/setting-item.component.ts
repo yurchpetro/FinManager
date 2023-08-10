@@ -41,9 +41,10 @@ export class SettingItemComponent implements OnInit {
 
     @Output() public submitData: EventEmitter<string> = new EventEmitter<string>();
 
-    public readonly SETTING_ITEM_ENUM: typeof SETTING_ITEM_ENUM = SETTING_ITEM_ENUM;
-
     public control: FormControl<string>;
+    public isPointerOpen: boolean = false;
+
+    public readonly SETTING_ITEM_ENUM: typeof SETTING_ITEM_ENUM = SETTING_ITEM_ENUM;
     private onChange: (value: string) => void;
     private onTouched: () => void;
 
@@ -68,6 +69,10 @@ export class SettingItemComponent implements OnInit {
         const value: string = (event as CustomEvent).detail.value;
         this.control.setValue(value);
         this.submitData.emit(value);
+    }
+
+    public openPointer(): void {
+        this.isPointerOpen = !this.isPointerOpen;
     }
 
     // ––––––––––––– Value Accessor –––––––––––––––
