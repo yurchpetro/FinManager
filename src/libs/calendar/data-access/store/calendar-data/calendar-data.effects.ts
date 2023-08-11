@@ -20,5 +20,14 @@ export class CalendarDataEffects {
         )
     );
 
+    public readonly onAsyncLoadError$: Observable<Action> = createEffect(() =>
+        this.actions$.pipe(
+            ofType(fromCalendarAsyncActions.LoadError),
+            map((action: fromCalendarAsyncActions.LoadError) => {
+                return fromCalendarDataActions.SetAllAction({ models: [] });
+            })
+        )
+    );
+
     constructor(private readonly actions$: Actions) {}
 }

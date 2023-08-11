@@ -1,7 +1,13 @@
 <app-horizontal-select [title]="(mounth$ | async)!" [dateFormat]="'MMMM yyyy'" (left)="previousMonth()" (right)="nextMounth()"></app-horizontal-select>
 
-<app-mounth-summary [summary]="(mounthSummary$ | async)!"></app-mounth-summary>
+<ng-container *ngIf="(calendarItems$ | async)?.length; else noDate">
+    <app-mounth-summary [summary]="(mounthSummary$ | async)!"></app-mounth-summary>
 
-<app-calendar-table [calendarItems]="(calendarItems$ | async)!"></app-calendar-table>
+    <app-calendar-table [calendarItems]="(calendarItems$ | async)!"></app-calendar-table>
+</ng-container>
 
 <app-loader *ngIf="isLoading$ | async"></app-loader>
+
+<ng-template #noDate>
+    <app-no-data></app-no-data>
+</ng-template>
