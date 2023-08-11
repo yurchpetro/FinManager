@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService, ROUTES_ENUM } from '@core';
+import { AuthService } from '@core';
 import { Router } from '@angular/router';
 import { VALIDATION_PATTERNS } from '@common/constants';
-import { RegisterModel } from '@libs/home/utils/models/register.model';
-import { catchError, of, take } from 'rxjs';
+import { RegisterFormModel } from '@libs/home/utils/models/register-form.model';
+import { SignInUpModel } from '@libs/home/utils/models/sign-in-up.model';
 
 @Component({
     selector: 'app-register',
@@ -13,18 +13,15 @@ import { catchError, of, take } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent implements OnInit {
-    public form: FormGroup<RegisterModel>;
+    public form: FormGroup<RegisterFormModel>;
 
+    @Output() public readonly signUp: EventEmitter<SignInUpModel> = new EventEmitter<SignInUpModel>();
     @Output() public readonly secondButton: EventEmitter<void> = new EventEmitter<void>();
 
-    constructor(
-        private readonly fb: FormBuilder,
-        private readonly authService: AuthService,
-        private readonly router: Router
-    ) {}
+    constructor(private readonly fb: FormBuilder) {}
 
     public ngOnInit(): void {
-        this.form = this.fb.group<RegisterModel>({
+        this.form = this.fb.group<RegisterFormModel>({
             email: this.fb.control<string | null>(null, [
                 Validators.required,
                 Validators.pattern(VALIDATION_PATTERNS.EMAIL_PATTERN),
@@ -36,18 +33,7 @@ export class RegisterComponent implements OnInit {
 
     public onRegister(): void {
         if (this.form.valid && this.form.controls.password.value === this.form.controls.repeatPassword.value) {
-            this.authService
-                .signUpWithEmail(this.form.controls.email.value!, this.form.controls.password.value!)
-                .pipe(
-                    take(1),
-                    catchError(err => {
-                        console.log(err);
-                        return of(null);
-                    })
-                )
-                .subscribe((): void => {
-                    void this.router.navigate([ROUTES_ENUM.DASHBOARD]);
-                });
+            this.signUp.emit({ email: this.form.controls.email.value!, password: this.form.controls.password.value! });
         }
     }
 

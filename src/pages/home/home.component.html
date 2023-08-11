@@ -9,14 +9,14 @@
 
 <ng-container *ngIf="isSignIn">
     <div class="form">
-        <app-sign-in (secondButton)="onRegister()"></app-sign-in>
+        <app-sign-in (signIn)="onSignIn($event)" (secondButton)="onRegister()"></app-sign-in>
     </div>
 </ng-container>
 
 
 <ng-container *ngIf="isSignUp">
     <div class="form">
-        <app-register (secondButton)="onLogin()"></app-register>
+        <app-register (signUp)="onSignUp($event)" (secondButton)="onLogin()"></app-register>
     </div>
 </ng-container>
 

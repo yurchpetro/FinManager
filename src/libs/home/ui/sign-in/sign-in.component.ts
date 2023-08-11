@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VALIDATION_PATTERNS } from '@common/constants';
-import { SignInModel } from '@libs/home/utils/models/sign-in.model';
+import { SignInFormModel } from '@libs/home/utils/models/sign-in-form.model';
 import { AuthService, ROUTES_ENUM } from '@core';
 import { catchError, of, take } from 'rxjs';
 import { Router } from '@angular/router';
+import { SignInUpModel } from '@libs/home/utils/models/sign-in-up.model';
 
 @Component({
     selector: 'app-sign-in',
@@ -13,8 +14,9 @@ import { Router } from '@angular/router';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInComponent implements OnInit {
-    public form: FormGroup<SignInModel>;
+    public form: FormGroup<SignInFormModel>;
 
+    @Output() public readonly signIn: EventEmitter<SignInUpModel> = new EventEmitter<SignInUpModel>();
     @Output() public readonly secondButton: EventEmitter<void> = new EventEmitter<void>();
 
     constructor(
@@ -24,7 +26,7 @@ export class SignInComponent implements OnInit {
     ) {}
 
     public ngOnInit(): void {
-        this.form = this.fb.group<SignInModel>({
+        this.form = this.fb.group<SignInFormModel>({
             email: this.fb.control<string | null>(null, [
                 Validators.required,
                 Validators.pattern(VALIDATION_PATTERNS.EMAIL_PATTERN),
@@ -35,18 +37,7 @@ export class SignInComponent implements OnInit {
 
     public onSubmit(): void {
         if (this.form.valid) {
-            this.authService
-                .signInWithEmail(this.form.controls.email.value!, this.form.controls.password.value!)
-                .pipe(
-                    take(1),
-                    catchError(err => {
-                        console.log(err);
-                        return of(null);
-                    })
-                )
-                .subscribe((): void => {
-                    void this.router.navigate([ROUTES_ENUM.DASHBOARD]);
-                });
+            this.signIn.emit({ email: this.form.controls.email.value!, password: this.form.controls.password.value! });
         }
     }
 
