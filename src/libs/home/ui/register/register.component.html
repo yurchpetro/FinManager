@@ -9,9 +9,12 @@
         </ion-item>
 
         <ion-item>
-            <ion-input formControlName="repeatPassword" type="password" label="Password"></ion-input>
+            <ion-input formControlName="repeatPassword" type="password" label="Repeat Password"></ion-input>
         </ion-item>
     </ion-list>
 
-    <ion-button (click)="onRegister()" [disabled]="form.invalid">Sign Up</ion-button>
+    <div class="buttton">
+        <p class="buttton__second" (click)="onSecond()">Already have account?</p>
+        <ion-button (click)="onRegister()" [disabled]="form.invalid">Sign Up</ion-button>
+    </div>
 </form>

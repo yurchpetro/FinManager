@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService, ROUTES_ENUM } from '@core';
 import { Router } from '@angular/router';
@@ -14,6 +14,8 @@ import { catchError, of, take } from 'rxjs';
 })
 export class RegisterComponent implements OnInit {
     public form: FormGroup<RegisterModel>;
+
+    @Output() public readonly secondButton: EventEmitter<void> = new EventEmitter<void>();
 
     constructor(
         private readonly fb: FormBuilder,
@@ -47,5 +49,9 @@ export class RegisterComponent implements OnInit {
                     void this.router.navigate([ROUTES_ENUM.DASHBOARD]);
                 });
         }
+    }
+
+    public onSecond(): void {
+        this.secondButton.emit();
     }
 }

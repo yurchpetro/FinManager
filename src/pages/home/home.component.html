@@ -1,2 +1,24 @@
-<app-sign-in></app-sign-in>
-<app-register></app-register>
+<app-info></app-info>
+
+<ng-container *ngIf="!isSignIn && !isSignUp">
+    <div class="buttons">
+        <ion-button (click)="onLogin()">Sign In</ion-button>
+        <ion-button (click)="onRegister()">Sign Up</ion-button>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="isSignIn">
+    <div class="form">
+        <app-sign-in (secondButton)="onRegister()"></app-sign-in>
+    </div>
+</ng-container>
+
+
+<ng-container *ngIf="isSignUp">
+    <div class="form">
+        <app-register (secondButton)="onLogin()"></app-register>
+    </div>
+</ng-container>
+
+
+

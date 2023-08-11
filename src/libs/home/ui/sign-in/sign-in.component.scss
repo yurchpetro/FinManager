@@ -1,0 +1,13 @@
+:host {
+    border: 1px solid gray;
+    padding: 20px;
+}
+
+.buttton {
+    display: flex;
+    justify-content: space-between;
+
+    &__second {
+        color: darkblue;
+    }
+}

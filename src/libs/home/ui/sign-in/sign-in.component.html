@@ -9,5 +9,8 @@
         </ion-item>
     </ion-list>
 
-    <ion-button (click)="onSubmit()" [disabled]="form.invalid">Sign In</ion-button>
+    <div class="buttton">
+        <p class="buttton__second" (click)="onSecond()">You don't have an account yet</p>
+        <ion-button (click)="onSubmit()" [disabled]="form.invalid">Sign In</ion-button>
+    </div>
 </form>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VALIDATION_PATTERNS } from '@common/constants';
 import { SignInModel } from '@libs/home/utils/models/sign-in.model';
@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 })
 export class SignInComponent implements OnInit {
     public form: FormGroup<SignInModel>;
+
+    @Output() public readonly secondButton: EventEmitter<void> = new EventEmitter<void>();
 
     constructor(
         private readonly fb: FormBuilder,
@@ -46,5 +48,9 @@ export class SignInComponent implements OnInit {
                     void this.router.navigate([ROUTES_ENUM.DASHBOARD]);
                 });
         }
+    }
+
+    public onSecond(): void {
+        this.secondButton.emit();
     }
 }
