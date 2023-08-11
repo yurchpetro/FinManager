@@ -47,6 +47,7 @@ export class AuthService {
     public signOut(): Observable<void> {
         this.userSource.next(false);
         this.localStorageService.removeItem('accessToken');
+        void this.router.navigate([ROUTES_ENUM.HOME]);
         return from(this.auth.signOut());
     }
 

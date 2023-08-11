@@ -1,5 +1,5 @@
 <ng-container *ngIf="isWeb">
-    <app-web-layout>
+    <app-web-layout [isLoggedIn]="isLoggedIn" (logout)="onLogout()">
         <ng-container *ngTemplateOutlet="routerRef"></ng-container>
     </app-web-layout>
 </ng-container>

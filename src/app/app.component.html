@@ -1,4 +1,4 @@
-<app-layout [isWeb]="isWeb$ | async">
+<app-layout [isWeb]="(isWeb$ | async)!" [isLoggedIn]="(isLoggedIn$ | async)!" (logout)="onLogout()">
     <router-outlet></router-outlet>
 </app-layout>
 

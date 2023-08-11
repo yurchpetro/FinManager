@@ -1,7 +1,7 @@
 <ion-header class="header">
     <div class="header__menu flex">
         <div class="header__title" [routerLink]="ROUTES_ENUM.HOME">Finance Manager</div>
-        <div class="menu">
+        <div *ngIf="isLoggedIn" class="menu">
             <div routerLinkActive="active" [routerLink]="ROUTES_ENUM.DASHBOARD" class="menu__item">
                 <ion-icon class="menu__item--icon icon__turn" name="swap-vertical-outline"></ion-icon>
                 Dashboard
@@ -20,9 +20,10 @@
             </div>
         </div>
     </div>
-    <div class="header__action">
+
+    <div *ngIf="isLoggedIn" class="header__action" (click)="onLogout()">
         <ion-icon class="header__action--icon" name="log-out-outline"></ion-icon>
-        Login
+        Logout
     </div>
 </ion-header>
 
